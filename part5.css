@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+.main .right {
+  width: 254px;
+  float: left;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.right .singer ,.right .anchor {
+  width: 254px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+}
+.right > div > h5 {
+  color: #333;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 2.5;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.right .singer ul li {
+  height: 62px;
+
+  border: 1px solid #ddd;
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+.right .singer ul li img {
+  display: block;
+  float: left;
+  width: 62px;
+  height: 62px;
+}
+.right .singer ul li  > div {
+  float: left;
+  font-size: 12px;
+  margin-left: 5px;
+  color: #666;
+}
+.right .singer ul li  > div p {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 2.5;
+  color: #222;
+}
+.right .anchor ul li {
+  height: 40px;
+  margin-bottom: 10px;
+}
+.right .anchor ul li img {
+  display: block;
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+.right .anchor ul li  > div {
+  float: left;
+  font-size: 12px;
+  margin-left: 5px;
+  color: #666;
+}
+.right .anchor ul li  > div p {
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 2;
+  color: #222;
+}
+.right .login .off{
+  background-color: #ededed;
+  color: #666;
+  font-size: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  border-bottom: 2px solid #bbb;
+}
+.right .login .off p {
+  line-height: 2;
+  text-align: left;
+  margin-bottom: 15px;
+}
+.right .login .off button {
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  background-image: linear-gradient(#e4251f,#bb1c0b);
+  border: 1px solid #a4170c;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px 0 #333;
+  outline: none;
+  cursor: pointer;
+}
+.right .login .off button:hover {
+  background-image: linear-gradient(#f02d34,#d4221e);
+}
+.right .login .alertLogin {
+  width: 530px;
+  height: 370px;
+  background-color: #fff;
+  border: 1px solid #666;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 3px #444;
+  position: fixed;
+  top:26%;
+  left: 50%;
+  margin-left: -265px;
+  z-index: 200;
+  overflow: hidden;
+}
+.right .login .alertLogin .tit {
+  height: 40px;
+  background-color: #2d2d2d;
+
+}
+.right .login .alertLogin .tit h5 {
+  line-height: 40px;
+  margin-left: 15px;  
+  color: #fff;
+  float: left;
+}
+.right .login .alertLogin .tit span {
+  line-height: 40px;
+  margin-right: 15px;  
+  color: #fff;
+  float: right;
+  display: block;
+  cursor: pointer;
+}
+.right .login .alertLogin .bg {
+  width: 210px;
+  margin: 50px auto 20px auto;
+}
+.right .login .alertLogin .bg img {
+  display: block;
+  width: 100%;
+}
+.right .login .alertLogin .btnArea {
+  width: 228px;
+  margin: 0 auto;
+}
+.right .login .alertLogin .btnArea button {
+  width: 226px;
+  height: 30px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  outline: none;
+}
+.right .login .alertLogin .btnArea button:nth-child(1){
+  border: 1px solid #1065bc;
+  color: #fff;
+  background-image: linear-gradient(#4493dc,#1e6ebe);
+}
+.right .login .alertLogin .btnArea button:nth-child(1):hover {
+  background-image: linear-gradient(#5ba1e1,#3e87ce);
+  cursor: pointer;
+}
+.right .login .alertLogin .btnArea button:nth-child(2){
+  border: 1px solid #ccc;
+  color: #333;
+  background-color: #fff;
+}
+.right .login .alertLogin .btnArea button:nth-child(2):hover {
+  background-color: #e2e2e2;
+  cursor: pointer;
+}
+.right .login .alertLogin .agree {
+  width: 300px;
+  margin: 20px auto;
+  font-size: 12px;
+}
+.right .login .alertLogin .agree a {
+  font-size: 12px;
+  color: #507DAF;
+  text-decoration: none;
+}
+.right .alertArea .alertMark {
+  width: 530px;
+  height: 314px;
+  background-color: #fff;
+  border: 1px solid #666;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 2px #444;
+  position: fixed;
+  top:30%;
+  left: 50%;
+  margin-left: -265px;
+  z-index: 300;
+  overflow: hidden;
+}
+.right .alertArea .alertMark .tit {
+  height: 40px;
+  background-color: #2d2d2d;
+}
+.right .alertArea .alertMark .tit h5 {
+  line-height: 40px;
+  margin-left: 15px;  
+  color: #fff;
+  float: left;
+}
+.right .alertArea .alertMark .tit span {
+  line-height: 40px;
+  margin-right: 15px;  
+  color: #fff;
+  float: right;
+  display: block;
+  cursor: pointer;
+}
+.right .alertArea .alertMark .enter {
+  width: 222px;
+  margin: 35px auto;
+}
+.right .alertArea .alertMark .enter > div:first-child {
+  width: 220px;
+  height: 30px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.right .alertArea .alertMark .enter select {
+  border-width: 0;
+  height: 26px;
+  outline: none;
+  width: 50px;
+}
+.right .alertArea .alertMark .enter > div:first-child input {
+  border-width: 0;
+  height: 30px;
+  outline: none;
+  width: 160px;
+}
+.right .alertArea .alertMark .enter > input {
+  display: block;
+  width: 222px;
+  border: 1px solid #ccc;
+  height: 30px;
+  outline: none;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+.right .alertArea .alertMark .enter .other {
+  height: 20px;
+  margin-top: 15px;
+}
+
+.right .alertArea .alertMark .enter .other label{
+  float: left;
+  font-size: 12px;
+  color: #999;
+  margin-left: 5px;
+}
+.right .alertArea .alertMark .enter .other input {
+  margin-top: 3px;
+  float: left;
+}
+.right .alertArea .alertMark .enter .other a {
+  float: right;
+  font-size: 12px;
+  color: #999;
+}
+.right .alertArea .alertMark .enter .btn {
+  outline: none;
+  width: 222px;
+  height: 30px;
+  border: 1px solid #1065bc;
+  border-radius: 3px;
+  color: #fff;
+  background-image: linear-gradient(#4493dc,#1e6ebe);
+  margin-top: 15px;
+}
+.right .alertArea .alertMark .enter .btn:hover {
+  background-image: linear-gradient(#5ba1e1,#3e87ce);
+  cursor: pointer;
+}
+.right .alertArea .alertMark .footer {
+  width: 100%;
+  line-height: 49px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  border-top: 1px solid #ccc;
+}
+.right .alertArea .alertMark .footer a {
+  font-size: 12px;
+  text-decoration: none;
+  color: #0c72c3;
+}
+.right .alertArea .alertMark .enter > label {
+  font-size: 12px;
+  margin-bottom: 10px;
+  display: block;
+  color: #666;
+  margin-left: 2px;
+}
+

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>我的网易云音乐</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- 解决非webpack下 Vue控制台提示You are running Vue in development mode.解决Vue控制台提示-->
+  <script>
+    Vue.config.productionTip = false;
+  </script>
+  <script src="dataJson.js"></script>
+  <link rel="stylesheet" href="part1.css">
+  <link rel="stylesheet" href="part2.css">
+  <link rel="stylesheet" href="part3.css">
+  <link rel="stylesheet" href="part4.css">
+  <link rel="stylesheet" href="part5.css">
+  <link rel="stylesheet" href="part6.css">
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!--  TODO:网易云音乐首页第一部分 -->
+    <div class="head">
+      <div class="nav">
+        <div class="center-wai">
+          <img src="img/logo.png" alt="">
+          <div class="choose clearFloat">
+            <a href="javascript:;">发现音乐</a>
+            <a href="javascript:;">我的音乐</a>
+            <a href="javascript:;">朋友</a>
+            <a href="javascript:;">商城</a>
+            <a href="javascript:;">音乐人</a>
+          </div>
+          <div class="operate">
+            <input type="text" placeholder="搜索">
+            <button>创作者中心</button>
+            <a href="javascript:;">登陆</a>
+          </div>
+        </div>
+      </div>
+      <div class="leveltow">
+        <div class="center-wai">
+          <a href="javascript:;">推荐</a>
+          <a href="javascript:;">排行榜</a>
+          <a href="javascript:;">歌单</a>
+          <a href="javascript:;">主播电台</a>
+          <a href="javascript:;">歌手</a>
+          <a href="javascript:;">新碟上架</a>
+        </div>
+      </div>
+    </div>
+    <!--  TODO:网易云音乐首页第二部分 -->
+    <div class="banner">
+      <div class="center">
+        <div class="tab">
+          <ul>
+            <li v-for="(item,index) in tabData" v-show="index==changeIndex">
+              <img :src="item.url" :alt="item.id">
+            </li>
+          </ul>
+          <div class="key">
+            <a href="javascript:;" v-for="(item,index) in tabData" :class="{active:index==changeIndex}"
+              @click=chooseKey(index)></a>
+          </div>
+        </div>
+        <div class="down"></div>
+      </div>
+
+    </div>
+    <!-- TODO:网易云音乐第三部分 -->
+    <div class="main clearFloat">
+      <div class="center clearFloat">
+        <!-- 左 -->
+        <div class="left" id="left">
+          <div class="hot">
+            <!-- 热力推荐 -->
+            <h2 class="clearFloat">
+              <i></i>
+              <span>热门推荐</span>
+            </h2>
+            <div class="hotBox clearFloat">
+              <div class="item" v-for="item in hotData">
+                <div class="pic">
+                  <img :src="item.url" alt="">
+                  <div class="mark"></div>
+                  <div class="bottom">{{item.num}}</div>
+                </div>
+                <p>{{item.name}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="top">
+            <h2 class="clearFloat">
+              <i></i>
+              <span>榜单</span>
+            </h2>
+            <div class="topList clearFloat">
+              <ul class="item" v-for="item in topData">
+                <div class="topHead">
+                  <img :src="item.img" alt="">
+                  <h4>{{item.name}}</h4>
+                </div>
+                <ul class="topItem">
+                  <li v-for="(i,key) in item.list">
+                    <strong>{{i.id}}</strong>
+                    <span>{{i.songName}}</span>
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+        <!-- 右 -->
+        <div class="right">
+          <div class="login">
+            <div class="off">
+              <p>登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机</p>
+              <button id="login" @click=openAlert(1)>用户登陆</button>
+            </div>
+            <div class="on"></div>
+            <div class="alertArea">
+              <!-- 第一个窗口 -->
+              <div class="alertLogin" id="alertLogin" v-show="alertShow==1">
+                <div class="tit">
+                  <h5>登陆</h5>
+                  <span @click=closeAlert>✕</span>
+                </div>
+                <div class="bg">
+                  <img src="https://music.163.com/style/web2/img/platform.png?2638069f5e31a9c412d1cbe6cb08dee2" alt="">
+                </div>
+                <div class="btnArea">
+                  <button @click=openAlert(2)>手机号登陆</button>
+                  <button @click=openAlert(3)>注册</button>
+                </div>
+                <div class="agree">
+                  <input type="checkbox" id="check">
+                  <label for="check">同意</label>
+                  <a href="javascript:;">《服务条款》</a>
+                  <a href="javascript:;">《隐私政策》</a>
+                  <a href="javascript:;">《儿童隐私政策》</a>
+                </div>
+              </div>
+              <!-- 第二个窗口 -->
+              <div class="alertMark" v-show="alertShow==2">
+                <div class="tit">
+                  <h5>手机号登陆</h5>
+                  <span @click=closeAlert>✕</span>
+                </div>
+                <div class="enter">
+                  <div>
+                    <select id="ip_number">
+                      <option value="86">+86</option>
+                      <option value="43">+43</option>
+                      <option value="994">+994</option>
+                      <option value="1242">+1242</option>
+                      <option value="973">+973</option>
+                    </select>
+                    <input type="text" placeholder="请输入手机号" v-model=myPhone>
+                  </div>
+                  <input type="password" placeholder="请输入密码" v-model=myPwd>
+                  <div class="other">
+                    <input type="checkbox" id="auto" checked>
+                    <label for="auto">自动登陆</label>
+                    <a href="javascript:;">忘记密码</a>
+                  </div>
+                  <button class="btn" @click=login>登陆</button>
+                </div>
+                <div class="footer">
+                  <a href="javascript:;" @click=openAlert(1)>&lt; 其他登录方式</a>
+                </div>
+              </div>
+              <!-- 第三个窗口 -->
+              <div class="alertMark" v-show="alertShow==3">
+                <div class="tit">
+                  <h5>手机号注册</h5>
+                  <span @click=closeAlert(3)>✕</span>
+                </div>
+                <div class="enter">
+                  <div>
+                    <select id="ip_number">
+                      <option value="86">+86</option>
+                      <option value="43">+43</option>
+                      <option value="994">+994</option>
+                      <option value="1242">+1242</option>
+                      <option value="973">+973</option>
+                    </select>
+                    <input type="text" placeholder="请输入手机号" v-model.number=myPhone>
+                  </div>
+                  <label>密码：</label>
+                  <input type="password" placeholder="设置登陆密码，不少于6位" v-model=myPwd>
+                  <button class="btn" @click=register>下一步</button>
+                </div>
+                <div class="footer">
+                  <a href="javascript:;" @click=openAlert(1)>&lt; 返回登陆</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="singer">
+            <h5>入驻歌手</h5>
+            <ul>
+              <li>
+                <img src="http://p2.music.126.net/p9U80ex1B1ciPFa125xV5A==/5931865232210340.jpg?param=62y62" alt="">
+                <div>
+                  <p>张惠妹aMEI</p>
+                  <span>台湾歌手张惠妹</span>
+                </div>
+              </li>
+              <li>
+                <img src="http://p1.music.126.net/1EN_iqQWU_E3DafzEOh3cA==/3302932937408956.jpg?param=62y62" alt="">
+                <div>
+                  <p>Fine乐团</p>
+                  <span>独立音乐人</span>
+                </div>
+              </li>
+              <li>
+                <img src="http://p1.music.126.net/ZuktZvjcxpYBjcWC3gmbPg==/19027048718765608.jpg?param=62y62" alt="">
+                <div>
+                  <p>萬曉利</p>
+                  <span>民谣歌手、中国...</span>
+                </div>
+              </li>
+              <li>
+                <img src="http://p1.music.126.net/v_zYgE9kmAwVGWV2c8hFxA==/7943971513291094.jpg?param=62y62" alt="">
+                <div>
+                  <p>音乐人赵雷</p>
+                  <span>民谣歌手</span>
+                </div>
+              </li>
+              <li>
+                <img src="http://p1.music.126.net/6wPGl_ddgAbJTx5kOohcyw==/109951163892302996.jpg?param=62y62" alt="">
+                <div>
+                  <p>王三溥</p>
+                  <span>音乐人</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="anchor">
+            <h5>热门主播</h5>
+            <ul>
+              <li>
+                <img src="http://p1.music.126.net/H3QxWdf0eUiwmhJvA4vrMQ==/1407374893913311.jpg?param=40y40" alt="">
+                <div>
+                  <p>陈立</p>
+                  <span>心理学家、美食家陈立教授</span>
+                </div>
+              </li>
+              <li>
+                <img src="http://p1.music.126.net/y5-sM7tjnxnu_V9LWKgZlw==/7942872001461517.jpg?param=40y40" alt="">
+                <div>
+                  <p>DJ艳秋</p>
+                  <span>著名音乐节目主持人</span>
+                </div>
+              </li>
+              <li>
+                <img src="http://p1.music.126.net/6cc6lgOfQTo6ovNnTHPyJg==/3427177769086282.jpg?param=40y40" alt="">
+                <div>
+                  <p>国家大剧院古典音乐官方</p>
+                  <span>国家大剧院古典音乐官方</span>
+                </div>
+              </li>
+              <li>
+                <img src="http://p1.music.126.net/xa1Uxrrn4J0pm_PJwkGYvw==/3130309604335651.jpg?param=40y40" alt="">
+                <div>
+                  <p>谢谢收听</p>
+                  <span>南京电台主持人王馨</span>
+                </div>
+              </li>
+              <li>
+                <img src="http://p1.music.126.net/slpd09Tf5Ju82Mv-h8MP4w==/3440371884651965.jpg?param=40y40" alt="">
+                <div>
+                  <p>DJ晓苏</p>
+                  <span>独立DJ，CRI环球旅...</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 页尾部分 -->
+    <div class="foot">
+      <div class="center">
+        <p>
+          <a href="javascript:;">服务条款</a> |
+          <a href="javascript:;">隐私政策</a> |
+          <a href="javascript:;">儿童隐私政策</a> |
+          <a href="javascript:;">版权投诉指引</a> |
+          <a href="javascript:;">意见反馈</a>
+        </p>
+        <p>
+          <span>网易公司版权所有©1997-2020</span>
+          <span>杭州乐读科技有限公司运营：浙网文[2018]3506-263号</span>
+        </p>
+        <p>
+          <span>违法和不良信息举报电话：0571-89853516</span>
+          <span>举报邮箱：ncm5990@163.com</span>
+        </p>
+        <p>
+          <span>粤B2-20090191-18</span>
+          <span>工业和信息化部备案管理系统网站</span>
+        </p>
+      </div>
+    </div>
+    <!-- 音乐部分 -->
+    <div class="song" id="song">
+      <div class="center">
+        <div class="part1 clearFloat">
+          <div class="qh"></div>
+          <div class="m p" onclick="play()" id="m"></div>
+          <div class="qh"></div>
+        </div>
+        <div class="part2 clearFloat">
+          <img :src="songData.url" alt="">
+          <div class="box">
+            <div class="row1">
+              <h4>{{songData.name}}</h4>
+              <span>{{songData.anchor}}</span>
+            </div>
+            <audio src="1.mp4" id="audio"></audio>
+            <div class="row2" id="row2">
+              <div class="progress" id="progress">
+                <div class="bar" id="bar"></div>
+              </div>
+              <div class="time">
+                <span id="dtz">00:00</span>
+                /
+                <span id="zsc"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="part3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    //音乐数据
+    var songJson = {
+      name:'ブルーバード (青鸟) ',
+      anchor:'水野良樹',
+      url:'https://p2.music.126.net/uszGsmUL1dIHvFa6GU1FpA==/3223768094172592.jpg?param=34y34',
+      src:'http://isure.stream.qqmusic.qq.com/C400002VrAbN481DBR.m4a?guid=5028771421&vkey=2CB49FCBB6B42BEBB7A7924DD4080E596DC7C4DA5DEEFF15D6CA691E0CD1CA7A64B35C8420C0FEEF661781FAC5DFCDF6E41D788251BE9C54&uin=5900&fromtag=66'
+    }
+    var audio = document.getElementById('audio');
+    var m = document.getElementById('m');
+    var song = document.getElementById('song');
+    var progress = document.getElementById('progress');
+    var isT = true;
+    //点击进度
+    // document.body.onclick = function(){
+    //   alert(222)
+    // }
+    song.onclick = function(e){
+      console.log(e.clientX)
+    }
+
+   
+  
+  
+    audio.addEventListener('canplay',function(){
+      var zsc = document.getElementById('zsc');
+      console.log(audio.currentTime)//毫秒数  == 》 09:09
+      zsc.innerHTML = toTime(audio.duration);
+    })
+    audio.addEventListener('timeupdate',function(){
+      var dtz = document.getElementById('dtz');
+      var bar = document.getElementById('bar');
+      // console.log('随时变化的值'+audio.currentTime)
+      // console.log('总时常'+audio.duration)
+      console.log (audio.currentTime/audio.duration * 100 + '%')
+      bar.style.width = audio.currentTime/audio.duration * 100 + '%';
+
+      dtz.innerHTML = toTime(audio.currentTime);
+    })
+
+
+    function toTime(t){
+      var minutes = parseInt(t/60);
+      var seconds = parseInt(t%60);
+
+      if(minutes<10){
+        minutes = '0' + minutes;
+      }
+      if(seconds<10){
+        seconds = '0' + seconds;
+      }
+
+      return minutes+':'+seconds;
+    }
+
+
+    //播放和暂停音乐
+    function play(){
+      if(isT){
+        //播放
+        audio.play();
+        isT = false;
+      }else {
+        //暂停
+        audio.pause();
+        isT=true;
+      }
+     
+    }
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        tabData: bannerPic,
+        changeIndex: 0,
+        hotData: hot,
+        topData: topJson,
+        //所有的 0
+        alertShow: 0,
+        //输入的手机号和密码
+        myPhone:'',
+        myPwd:'',
+        songData:songJson,
+        audio:audio
+      },
+      //方法属性
+      methods: {
+        chooseKey: function (i) {
+          this.changeIndex = i;
+        },
+        //打开隐藏的弹窗
+        openAlert: function (i) {
+          this.alertShow = i;
+        },
+        closeAlert: function () {
+          this.myPhone = '';
+          this.myPwd = '';
+          this.alertShow = 0;
+        },
+        //注册
+        register: function () {
+          //因为套了函数所以转换一下that
+          var that = this;
+          fetch(
+            'http://localhost:8081/register', {
+              method: 'post',
+              body: JSON.stringify({
+                phone: this.myPhone,
+                pwd: this.myPwd
+              }),
+              headers: {'Content-Type': 'application/json'}
+            }
+          ).then(function (result) {
+            return result.text();
+          }).then(function (data) {
+            // console.log(JSON.parse(data))
+            var json = JSON.parse(data);
+            if(json.state == 200){
+              alert(json.msg);
+              that.closeAlert();
+            }else if(json.state == 400){
+              alert(json.msg);
+              that.myPhone = '';
+              that.myPwd = '';
+            }else {
+              alert('未列明错误');
+            }
+          })
+        },
+        login:function(){
+          var that = this;
+          fetch(
+            'http://localhost:8081/login', {
+              method: 'post',
+              body: JSON.stringify({
+                phone: this.myPhone,
+                pwd: this.myPwd
+              }),
+              headers: {'Content-Type': 'application/json'}
+            }
+          ).then(function (result) {
+            return result.text();
+          }).then(function (data) { 
+            var json = JSON.parse(data);
+            // console.log(json)
+            if(json.state == 200){
+              alert(json.msg);
+              that.closeAlert();
+            }else if(json.state == 250){
+              alert(json.msg);
+              that.myPhone = '';
+              that.myPwd = '';
+            }else {
+              alert(json.msg);
+              that.myPhone = '';
+              that.myPwd = '';
+            }
+            
+          })
+        },
+        
+      },
+
+    })
+  </script>
+</body>
+
+</html>

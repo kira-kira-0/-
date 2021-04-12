@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.song {
+  width: 100%;
+  height: 50px;
+  background-color: #000;
+  color: white;
+  position: fixed;
+  z-index: 400;
+  bottom: 0;
+}
+.song .part1 {
+  width: 110px;
+  float: left;
+}
+.song .part1 > div {
+  background-image: url(https://music.163.com/style/web2/img/frame/playbar.png?117d9b4ea6239874d52aadb46a12e8df);
+  float: left;
+  cursor: pointer;
+}
+.song .part1 .qh{
+  width: 26px;
+  height: 26px;
+  margin-top: 12px;
+}
+.song .part1 .m{
+  width: 36px;
+  height: 36px;
+
+  margin: 7px 10px;
+}
+.song .part1 .p {
+  background-position: 0 -204px;
+}
+.song .part1 .c {
+  background-position: 0 -164px;
+}
+.song .part1 .qh:nth-child(1){
+  background-position: -1px -130px;
+}
+.song .part1 .qh:nth-child(3){
+  background-position: -81px -130px;
+}
+.song .part2 {
+  width: 646px;
+  float: left;
+  
+}
+.song .part2 > img {
+  width: 34px;
+  height: 34px;
+  display: block;
+  float: left;
+  border: 1px solid #000;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-top: 6px;
+}
+.song .part2 .box {
+  float: left;
+  width: 590px;
+  height: 50px;
+  margin-left: 4px;
+}
+.song .part2 .box .row1 {
+  height: 28px;
+}
+.song .part2 .box .row1 h4 {
+  float: left;
+  font-size: 12px;
+  line-height: 28px;
+  margin-right: 15px;
+}
+.song .part2 .box .row1 span {
+  float: left;
+  font-size: 11px;
+  line-height: 28px;
+}
+.song .part2 .box .row2 {
+  height: 22px;
+}
+.song .part2 .box .row2 .progress{
+  width: 500px;
+  height: 9px;
+  border-radius: 9px;
+  overflow: hidden;
+  background-color: #aaa;
+}
+.song .part2 .box .row2 .bar {
+  background-color: #c71f0d;
+  width: 0;
+  height: 9px;
+}
+.song .part2 .box .row2 .time {
+  width: 80px;
+  float: right;
+  font-size: 11px;
+  color: #ccc;
+
+  margin-top: -12px;
+}
